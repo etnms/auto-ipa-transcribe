@@ -1,1 +1,6 @@
 /venv
+__pycache__
+
+# directory with files to transcribe
+/files
+output.txt
