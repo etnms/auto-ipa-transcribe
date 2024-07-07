@@ -10,3 +10,4 @@ output.txt
 # eaf files
 *.eaf
 *.pfsx
+*.bak
