@@ -5,3 +5,8 @@ __pycache__
 /files
 output.txt
 /audio-chunks
+
+
+# eaf files
+*.eaf
+*.pfsx
