@@ -4,3 +4,4 @@ __pycache__
 # directory with files to transcribe
 /files
 output.txt
+/audio-chunks
