@@ -23,21 +23,18 @@ def create_empty_elan_file(output_file, language_code, chunks_information):
     eaf.add_tier(ipa_tier_id, ling="ipa-transcription")
 
     # Add annotation
-    add_annotations(eaf, transcription_tier_id, chunks_information)
+    add_annotations(eaf, transcription_tier_id, chunks_information, "text")
+    add_annotations(eaf, ipa_tier_id, chunks_information, "ipa_text")
     # Save the EAF to file
     eaf.to_file(output_file)
 
     print(f"Empty ELAN file created: {output_file}")
 
 
-def add_annotations(file, id_tier, chunks_information):
+def add_annotations(file, id_tier, chunks_information, value):
     '''
     Function to automatically add annotations for transcription and IPA
     '''
-    print(chunks_information)
     for chunk in chunks_information:
-        # if empty value then create empty string (space)
-        if chunk["text"] == "":
-            chunk["text"] == " "
         file.add_annotation(
-            id_tier, chunk["start_time"], chunk["end_time"], chunk["text"])
+            id_tier, chunk["start_time"], chunk["end_time"], chunk[value])

@@ -3,7 +3,7 @@ import os
 from pydub import AudioSegment
 from pydub.silence import split_on_silence
 from split_audio_file import clear_chunk_directory
-
+import eng_to_ipa as ipa
 
 # create a speech recognition object
 r = sr.Recognizer()
@@ -44,6 +44,7 @@ def get_large_audio_transcription_on_silence(path):
     chunks_information = []
     current_time = 0
     whole_text = ""
+    whole_ipa_text = ""
 
     # process each chunk
     for i, audio_chunk in enumerate(chunks, start=1):
@@ -57,29 +58,36 @@ def get_large_audio_transcription_on_silence(path):
         # recognize the chunk
         try:
             text = transcribe_audio(chunk_filename)
+            ipa_text = ipa.convert(text)
         except sr.UnknownValueError as e:
+            # Empty string if error to keep annotation
+            text = ""
+            ipa_text = ""
             print("Error:", str(e))
-        else:
-            # Store timing information
-            chunks_information.append({
-                'chunk': i,
-                'start_time': start_time,
-                'end_time': end_time,
-                'duration': len(chunk_filename),
-                'text': text
-            })
 
-            # Update current_time for the next chunk
-            current_time = end_time
+         # Store timing information
+        chunks_information.append({
+            "chunk": i,
+            "start_time": start_time,
+            "end_time": end_time,
+            "duration": len(chunk_filename),
+            "text": text,
+            "ipa_text": ipa_text
+        })
 
-            # Display text, alone or as a whole
+        # Update current_time for the next chunk
+        current_time = end_time
+
+        # Display text, alone or as a whole
+        if text != "":
             text = f"{text.capitalize()}. "
-            # print(chunk_filename, ":", text)
+        # print(chunk_filename, ":", text)
 
-            whole_text += text
+        whole_text += text
+        whole_ipa_text += ipa_text
 
     # Clear chunk directory
     clear_chunk_directory(folder_name)
 
     # return the text for all chunks detected
-    return whole_text, chunks_information
+    return whole_text, whole_ipa_text, chunks_information

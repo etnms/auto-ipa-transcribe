@@ -4,11 +4,10 @@ from write_to_file import write_text
 from create_elan_file import create_empty_elan_file
 
 
-text, chunks_information = get_large_audio_transcription_on_silence(
+text, ipa_text, chunks_information = get_large_audio_transcription_on_silence(
     "files/test2.m4a")
 
 # text = transcribe_audio("files/test_sample.wav")
-ipa_text = ipa.convert(text)
 
 # Write final text output
 write_text("outputs", "output_text.txt", text)
