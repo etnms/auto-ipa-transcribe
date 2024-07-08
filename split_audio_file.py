@@ -54,8 +54,3 @@ def clear_chunk_directory(folder_name):
     for filename in os.listdir(folder_name):
         f = os.path.join(folder_name, filename)
         os.remove(f)
-
-
-path = "files/test2.m4a"
-
-timestamps = split_audio_file(path)

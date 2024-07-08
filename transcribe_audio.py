@@ -20,7 +20,7 @@ def transcribe_audio(path):
 
 
 # a function that splits the audio file into chunks on silence and applies speech recognition
-def get_large_audio_transcription_on_silence(path):
+def transcribe_large_audio_file(path):
     """Splitting the large audio file into chunks
     and apply speech recognition on each of these chunks"""
 
