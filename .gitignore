@@ -1,11 +1,10 @@
 /venv
 __pycache__
 
-# directory with files to transcribe
+# directory with files to transcribe and outputs
 /files
-output.txt
+/outputs
 /audio-chunks
-
 
 # eaf files
 *.eaf

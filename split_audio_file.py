@@ -41,12 +41,19 @@ def split_audio_file(path):
         # Update current_time for the next chunk
         current_time = end_time
 
-    print("Timestamps for each chunk:")
-    for ts in timestamps:
-        print(
-            f"Chunk {ts['chunk']}: Start: {ts['start_time']}ms, End: {ts['end_time']}ms, Duration: {ts['duration']}ms")
+    # Clear directory from the audio chunks created
+    clear_chunk_directory(folder_name)
 
     return timestamps
+
+
+def clear_chunk_directory(folder_name):
+    '''
+    Function to clear audio-chunks directory once done with the actions
+    '''
+    for filename in os.listdir(folder_name):
+        f = os.path.join(folder_name, filename)
+        os.remove(f)
 
 
 path = "files/test2.m4a"
