@@ -14,7 +14,9 @@ def create_empty_elan_file(output_file, language_code, linked_file, chunks_infor
     # Add a linked file based on relative path
     # This approach may need to be changed for better use from the user's end
     abs_path_file = os.path.abspath(linked_file)
-    eaf.add_linked_file(abs_path_file, relpath=linked_file)
+    file_extension = os.path.splitext(abs_path_file)[1]
+    eaf.add_linked_file(abs_path_file, relpath=linked_file,
+                        mimetype=file_extension)
 
     # Add linguistic type
     eaf.add_linguistic_type("transcription")
@@ -34,7 +36,7 @@ def create_empty_elan_file(output_file, language_code, linked_file, chunks_infor
     # Save the EAF to file
     eaf.to_file(output_file)
 
-    print(f"Empty ELAN file created: {output_file}")
+    print(f"ELAN file created: {output_file}")
 
 
 def add_annotations(file, id_tier, chunks_information, value):

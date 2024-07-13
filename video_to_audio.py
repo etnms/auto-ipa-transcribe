@@ -1,5 +1,5 @@
 from audio_extract import extract_audio
-
+import os
 
 input_path = "./files/test_video.mov"
 output_path = "./files/test_video_audio.mp3"
@@ -11,5 +11,7 @@ output_path = "./files/test_video_audio.mp3"
 
 def convert_video_to_audio(input_path, output_path):
     # return file as wav to keep quality
-    audio_file = extract_audio(input_path, output_path, "wav")
-    return audio_file
+    if os.path.exists(output_path):
+        os.remove(output_path)
+    extract_audio(input_path, output_path, "wav")
+    return output_path
