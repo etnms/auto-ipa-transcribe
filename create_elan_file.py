@@ -43,7 +43,7 @@ def add_annotations(file, id_tier, chunks_information, value):
     '''
     Function to automatically add annotations for transcription and IPA
     '''
-    print(chunks_information)
+
     for chunk in chunks_information:
         file.add_annotation(
             id_tier, chunk["start_time"], chunk["end_time"], chunk[value])
